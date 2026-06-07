@@ -5,7 +5,9 @@ When an IP is banned, ARB will scan all connected peers. If any peer's IP addres
 
 :::warning Scope
 
-PBH only checks torrents in an active transfer state (`downloading`, `uploading`, `stalledDL`, `forcedDL`, `forcedUP`, etc.). Peers on torrents in `stalledUP` (seeding without transfer), `pausedUP`/`pausedDL` (paused) states **will not be checked**, and automatic range bans will not apply to them.
+PBH only checks torrents in an [active transfer state](https://github.com/qbittorrent/qBittorrent/wiki/WebUI-API-(qBittorrent-4.1)#torrent-management). Peers on `stalledUP` (seeding, no transfer) or paused torrents **will not be checked**.
+
+See [FAQ](../faq.md#why-are-some-connected-peers-not-being-banned-despite-configured-rules).
 
 :::
 

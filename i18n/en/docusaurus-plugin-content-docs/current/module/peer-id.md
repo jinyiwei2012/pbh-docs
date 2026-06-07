@@ -10,9 +10,9 @@ The PeerID is reported by the Peer itself (and can be modified at will), so it c
 
 :::warning Scope
 
-PBH only checks torrents in an active transfer state (`downloading`, `uploading`, `stalledDL`, `forcedDL`, `forcedUP`, etc.). Peers on torrents in `stalledUP` (seeding without transfer), `pausedUP`/`pausedDL` (paused) states **will not be checked**, and PeerID rules will not apply to them.
+PBH only checks torrents in an [active transfer state](https://github.com/qbittorrent/qBittorrent/wiki/WebUI-API-(qBittorrent-4.1)#torrent-management). Peers on `stalledUP` (seeding, no transfer) or paused torrents **will not be checked**.
 
-This is an intentional performance optimization to reduce API request volume and downloader load.
+See [FAQ](../faq.md#why-are-some-connected-peers-not-being-banned-despite-configured-rules).
 
 :::
 

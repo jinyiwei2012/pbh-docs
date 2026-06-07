@@ -5,7 +5,9 @@
 
 :::warning 生效范围
 
-PBH 仅检查处于活跃传输状态的种子（`downloading`、`uploading`、`stalledDL`、`forcedDL`、`forcedUP` 等）。`stalledUP`（做种无传输）、`pausedUP`/`pausedDL`（暂停）状态下的 Peer **不会被检查**，自动范围封禁对其不生效。
+PBH 仅检查处于[活跃传输状态](https://github.com/qbittorrent/qBittorrent/wiki/WebUI-API-(qBittorrent-4.1)#torrent-management)的种子。`stalledUP`（做种无传输）、暂停状态下的 Peer **不会被检查**。
+
+详见 [FAQ](../faq.md#为什么配置了封禁规则但有些-peer-没有被封禁)。
 
 :::
 

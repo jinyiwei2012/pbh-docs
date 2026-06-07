@@ -9,9 +9,9 @@ PeerBanHelper 的重要模块之一，默认订阅来自 [PBH-BTN/BTN-Collected-
 
 :::warning 生效范围
 
-PBH 仅检查处于活跃传输状态的种子（`downloading`、`uploading`、`stalledDL`、`forcedDL`、`forcedUP` 等）。`stalledUP`（做种无传输）、`pausedUP`/`pausedDL`（暂停）状态下的 Peer **不会被检查**，订阅规则对其不生效。
+PBH 仅检查处于[活跃传输状态](https://github.com/qbittorrent/qBittorrent/wiki/WebUI-API-(qBittorrent-4.1)#torrent-management)的种子。`stalledUP`（做种无传输）、暂停状态下的 Peer **不会被检查**。
 
-此为性能优化设计，减少对下载器的 API 请求次数和负载。即使有此限制，部分下载器在全量封禁检查时仍可能出现卡死。
+此为性能优化设计，详见 [FAQ](../faq.md#为什么配置了封禁规则但有些-peer-没有被封禁)。
 
 :::
 

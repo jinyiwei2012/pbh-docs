@@ -9,9 +9,9 @@ It is not recommended to configure this feature through the configuration file; 
 
 :::warning Scope
 
-PBH only checks torrents in an active transfer state (`downloading`, `uploading`, `stalledDL`, `forcedDL`, `forcedUP`, etc.). Peers on torrents in `stalledUP` (seeding without transfer), `pausedUP`/`pausedDL` (paused) states **will not be checked**, and subscription rules will not apply to them.
+PBH only checks torrents in an [active transfer state](https://github.com/qbittorrent/qBittorrent/wiki/WebUI-API-(qBittorrent-4.1)#torrent-management). Peers on `stalledUP` (seeding, no transfer) or paused torrents **will not be checked**.
 
-This is an intentional performance optimization to reduce API request volume and downloader load. Even with this restriction, some downloaders still freeze during a full ban wave cycle.
+This is a performance optimization. See [FAQ](../faq.md#why-are-some-connected-peers-not-being-banned-despite-configured-rules).
 
 :::
 
