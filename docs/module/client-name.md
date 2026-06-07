@@ -6,13 +6,11 @@ ClientName 是由 Peer 主动汇报的（可以被随意修改），因此不能
 :::
 ClientName 是 BitTorrent 的一个[扩展协议](https://www.bittorrent.org/beps/bep_0010.html)，因此一个 Peer 可以没有 ClientName。对于这种情况，PeerBanHelper 会显示为 `N/A`。
 
-:::warning 生效范围
+## 生效范围
 
 PBH 仅检查处于[活跃传输状态](https://github.com/qbittorrent/qBittorrent/wiki/WebUI-API-(qBittorrent-4.1)#torrent-management)的种子。`stalledUP`（做种无传输）、暂停状态下的 Peer **不会被检查**。
 
 详见 [FAQ](../faq.md#为什么配置了封禁规则但有些-peer-没有被封禁)。
-
-:::
 
 ## 触发条件
 

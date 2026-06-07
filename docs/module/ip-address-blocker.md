@@ -6,13 +6,12 @@
 不建议通过配置文件配置此功能，您可以直接使用 WebUI 的可视化编辑。
 :::
 
-:::warning 生效范围
+## 生效范围
 
 PBH 仅检查处于[活跃传输状态](https://github.com/qbittorrent/qBittorrent/wiki/WebUI-API-(qBittorrent-4.1)#torrent-management)的种子。`stalledUP`（做种无传输）、暂停状态下的 Peer **不会被检查**。
 
 此为性能优化设计，详见 [FAQ](../faq.md#为什么配置了封禁规则但有些-peer-没有被封禁)。
 
-:::
 ## 触发条件
 
 - **管道**：种子处于[活跃传输状态](#生效范围)
