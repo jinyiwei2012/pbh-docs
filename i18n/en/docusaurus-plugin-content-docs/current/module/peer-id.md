@@ -6,10 +6,14 @@ The PeerID filter detects using the PeerID actively reported by the Peer. For cl
 The PeerID is reported by the Peer itself (and can be modified at will), so it cannot be used as the sole basis for determining the client.
 :::
 
-:::warning Only checks active torrents
-PBH only checks torrents in an **active transfer state** (e.g., `downloading`, `uploading`, `stalledDL`, `forcedDL`, `forcedUP`, etc.). Peers on torrents in `stalledUP` (seeding but no active transfer), `pausedUP`/`pausedDL` (paused) states **will not be checked by PBH**, so PeerID filter rules will not apply to these peers.
+![peer-id](./assets/peer-id.png)
 
-This is an intentional design decision to reduce API request volume and downloader load.
+:::warning Scope
+
+PBH only checks torrents in an active transfer state (`downloading`, `uploading`, `stalledDL`, `forcedDL`, `forcedUP`, etc.). Peers on torrents in `stalledUP` (seeding without transfer), `pausedUP`/`pausedDL` (paused) states **will not be checked**, and PeerID rules will not apply to them.
+
+This is an intentional performance optimization to reduce API request volume and downloader load.
+
 :::
 
 ![peer-id](./assets/peer-id.png)
