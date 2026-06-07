@@ -14,7 +14,18 @@ PBH 仅检查处于[活跃传输状态](https://github.com/qbittorrent/qBittorre
 
 ![Auto Range Ban](./assets/auto-range-ban.png)
 
-## 配置文件
+## 触发条件
+
+本模块在以下条件**全部满足**时触发检查：
+
+1. 种子处于[活跃传输状态](#生效范围)
+2. Peer 已完成握手
+3. Peer **不在**当前封禁列表中（已封禁的不重复检查）
+4. 封禁列表中至少有一个已封禁 IP，且与当前 Peer 在同一子网段（IPv4 默认 `/24`，IPv6 默认 `/52`）
+
+:::note
+ARB 本身不主动封禁 Peer——它依赖其他模块先产生封禁记录，然后扫描同一子网内的其他 Peer 进行**连锁封禁**。
+:::
 
 ```yaml
   # 范围 IP 段封禁

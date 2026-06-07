@@ -6,6 +6,25 @@
 
 ![BTN-Profile](./assets/btn-profile.png)
 
+## 触发条件
+
+本模块在以下条件**全部满足**时触发检查：
+
+1. 种子处于[活跃传输状态](../faq.md#为什么配置了封禁规则但有些-peer-没有被封禁)
+2. BTN 网络已连接并初始化成功
+3. Peer 已完成握手（传统规则部分）
+
+检查顺序（优先级从高到低）：
+
+| 步骤 | 检查内容 | 命中后动作 |
+|---|---|---|
+| 1 | IP 允许列表（白名单） | **SKIP** — 跳过所有后续模块 |
+| 2 | 云端 AviatorScript 脚本 | 脚本返回 BAN / SKIP / NO_ACTION |
+| 3 | IP 拒绝列表（现代 BTN） | BAN |
+| 4 | 传统规则：PeerID / ClientName / IP / Port | BAN |
+
+传统规则部分**有缓存**（`readCacheButWritePassOnly`），BTN 规则更新时自动失效。现代 IP 匹配使用 Trie 树结构。
+
 ## 配置文件
 
 config.yml

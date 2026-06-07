@@ -14,6 +14,16 @@ PBH 仅检查处于[活跃传输状态](https://github.com/qbittorrent/qBittorre
 
 :::
 
+## 触发条件
+
+本模块在以下条件**全部满足**时触发检查：
+
+1. 种子处于[活跃传输状态](#生效范围)
+2. Peer 已完成握手，或 ClientName 不为空（握手中的空 ClientName 直接跳过）
+3. **不使用缓存**——每次 Ban Wave 都对所有 Peer 执行规则匹配
+
+匹配使用 [JSON 规则引擎](../misc/json-engine.md)，支持 `STARTS_WITH`、`CONTAINS`、`EQUALS`、`REGEX` 等方式，规则从上到下依次执行，首次命中即返回。
+
 ## 配置文件
 
 规则使用[JSON规则引擎](../misc/json-engine.md)语法。你可以通过编写 JSON 规则来控制封禁行为。但如果只是简单的封禁和例外排除，则可以通过 WebUI 完成。

@@ -23,6 +23,16 @@ PBH 仅检查处于[活跃传输状态](https://github.com/qbittorrent/qBittorre
 
 ![rules-sub-logs](./assets/sub-rules-logs.png)
 
+## 触发条件
+
+本模块在以下条件**全部满足**时触发检查：
+
+1. 种子处于[活跃传输状态](#生效范围)
+2. 订阅规则已成功加载（启动时 + 每 4 小时更新一次）
+3. Peer 已完成握手
+
+与 IP 封禁模块不同，本模块**不使用缓存**——每次 Ban Wave 都会对所有活跃种子的 Peer 执行 Trie 树匹配，确保不遗漏。
+
 ## 制作规则
 
 PeerBanHelper 可以加载由以下内容组成的 IP 规则集：

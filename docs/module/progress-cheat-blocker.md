@@ -2,6 +2,26 @@
 
 进度检查器（ProgressCheatBlocker）（有时也称为 PCB 或者启发式检测算法）是由 PeerBanHelper 创建的基于下载进度的一种启发式的反吸血检测算法。 
 
+## 触发条件
+
+本模块在以下条件**全部满足**时触发检查：
+
+1. 种子处于活跃传输状态（由 `getTorrents()` 的 `filter=active` 保证）
+2. Peer 已完成握手（`isHandShaking` = false）
+3. 种子大小 ≥ `minimum-size`（默认 50MB）
+4. **正在向 Peer 上传数据**（`uploadSpeed > 0` 或 `uploaded > 0`）— 不做种的 Peer 不检查
+
+满足以上条件后，按以下顺序检查：
+
+| 检查项 | 触发条件 | 动作 |
+|---|---|---|
+| 快速 PCB 测试 | `computedUploaded ≥ torrentSize × fastPcbTestPercentage` | `BAN_FOR_DISCONNECT`（短暂断开，默认 15s） |
+| 过量下载 | `computedUploaded > torrentSize × excessiveThreshold` | BAN |
+| 进度差异 | `│实际进度 - 汇报进度│ > maximumDifference` | 启动延迟窗口 → 超时后 BAN |
+| 进度回退 | `上次记录进度 - 当前进度 > rewindMaximumDifference` | BAN |
+
+**不使用 PBH 统一缓存**，使用内部 `PBHCache` + 数据库持久化追踪每个 Peer 的进度历史。
+
 ## 概述
 
 传统的反吸血通常依靠检查 PeerID 或者 ClientName 来屏蔽。这对于*迅雷*或者*QQ旋风*这种如实报告自己 PeerID 的 Peer 效果不错。但如果恶意吸血者冒充了 qBittorrent 或 Transmission 这种正常客户端，那么传统的反吸血手段就会完全失效。
