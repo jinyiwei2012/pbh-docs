@@ -16,13 +16,10 @@ PBH 仅检查处于[活跃传输状态](https://github.com/qbittorrent/qBittorre
 
 ## 触发条件
 
-本模块在以下条件**全部满足**时触发检查：
-
-1. 种子处于[活跃传输状态](#生效范围)
-2. Peer 已完成握手，或 ClientName 不为空（握手中的空 ClientName 直接跳过）
-3. **不使用缓存**——每次 Ban Wave 都对所有 Peer 执行规则匹配
-
-匹配使用 [JSON 规则引擎](../misc/json-engine.md)，支持 `STARTS_WITH`、`CONTAINS`、`EQUALS`、`REGEX` 等方式，规则从上到下依次执行，首次命中即返回。
+- **管道**：种子处于[活跃传输状态](#生效范围)
+- **握手**：Peer 已完成握手（空 ClientName 跳过）
+- **缓存**：无缓存，每次 Ban Wave 都检查
+- **匹配**：[JSON 规则引擎](../misc/json-engine.md)，支持 `STARTS_WITH`/`CONTAINS`/`EQUALS`/`REGEX`，首次命中即 BAN
 
 ## 配置文件
 
