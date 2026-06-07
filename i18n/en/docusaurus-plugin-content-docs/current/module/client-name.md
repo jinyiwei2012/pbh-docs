@@ -3,6 +3,12 @@
 The ClientName filter uses the ClientName actively reported by the Peer (sometimes called "client name" or "UserAgent") for detection. It is recommended to prioritize using the built-in ClientName filtering functionality of clients with an embedded PeerID filter (e.g., qBittorrent Enhanced Edition).  
 Note that the ClientName is actively reported by the Peer (and can be arbitrarily modified), so it should not be used as the sole basis for determining the client type.
 
+:::warning Only checks active torrents
+PBH only checks torrents in an **active transfer state** (e.g., `downloading`, `uploading`, `stalledDL`, `forcedDL`, `forcedUP`, etc.). Peers on torrents in `stalledUP` (seeding but no active transfer), `pausedUP`/`pausedDL` (paused) states **will not be checked by PBH**, so ClientName filter rules will not apply to these peers.
+
+This is an intentional design decision to reduce API request volume and downloader load.
+:::
+
 ClientName is an [extended protocol](https://www.bittorrent.org/beps/bep_0010.html) of BitTorrent, so a Peer may not have a ClientName. In such cases, PeerBanHelper will display it as `N/A`.
 
 ## Configuration File

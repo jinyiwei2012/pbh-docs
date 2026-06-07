@@ -1,8 +1,13 @@
 # ClientName 过滤器
 
-ClientName 过滤器会使用由 Peer 主动汇报的 ClientName（有时也称为 “客户端名称” 或者 “UserAgent”）来检测。对于内置 PeerID 过滤器的客户端（例如 qBittorrent Enhanced Edition），建议优先使用其内置的 ClientName 过滤功能。  
+ClientName 过滤器会使用由 Peer 主动汇报的 ClientName（有时也称为 "客户端名称" 或者 "UserAgent"）来检测。对于内置 PeerID 过滤器的客户端（例如 qBittorrent Enhanced Edition），建议优先使用其内置的 ClientName 过滤功能。  
 :::warning
 ClientName 是由 Peer 主动汇报的（可以被随意修改），因此不能作为判定对方客户端的依据。  
+:::
+:::warning 仅检查活跃传输的种子
+PBH 仅检查处于活跃传输状态的种子（`downloading`、`uploading`、`stalledDL`、`forcedDL`、`forcedUP` 等）。`stalledUP`（做种无传输）、`pausedUP`/`pausedDL`（暂停）状态下的 Peer **不会被检查**，ClientName 规则对其不生效。
+
+此为性能优化设计，用于减少对下载器的 API 请求次数和负载。
 :::
 ClientName 是 BitTorrent 的一个[扩展协议](https://www.bittorrent.org/beps/bep_0010.html)，因此一个 Peer 可以没有 ClientName。对于这种情况，PeerBanHelper 会显示为 `N/A`。
 

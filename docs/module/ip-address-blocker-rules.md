@@ -3,6 +3,12 @@
 PeerBanHelper 的重要模块之一，默认订阅来自 [PBH-BTN/BTN-Collected-Rules](https://github.com/PBH-BTN/BTN-Collected-Rules) 的规则。  
 当有规则内的 IP 连接下载器时，PeerBanHelper 会立刻封禁它。
 
+:::warning 仅检查活跃传输的种子
+PBH 仅检查处于活跃传输状态的种子（`downloading`、`uploading`、`stalledDL`、`forcedDL`、`forcedUP` 等）。`stalledUP`（做种无传输）、`pausedUP`/`pausedDL`（暂停）状态下的 Peer **不会被检查**，订阅规则对其不生效。
+
+这是有意为之的性能优化：减少对下载器的 API 请求次数和负载。即使已有此限制，仍有部分用户的下载器在 PBH 全量封禁检查时会出现卡死。
+:::
+
 :::tip
 不建议通过配置文件配置此功能，您可以直接使用 WebUI 的可视化编辑
 :::

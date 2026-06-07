@@ -3,6 +3,12 @@
 Due to the latency of the [Progress Checker](./progress-cheat-blocker.md), some traffic from the IP is already leached before the user bans it. This feature is designed to help users stop losses in a timely manner.  
 When an IP is banned, ARB will scan all connected peers. If any peer's IP address is in the same subnet as the banned IP, that peer will be chain-banned.
 
+:::warning Only checks active torrents
+PBH only checks torrents in an **active transfer state** (e.g., `downloading`, `uploading`, `stalledDL`, `forcedDL`, `forcedUP`, etc.). Peers on torrents in `stalledUP` (seeding but no active transfer), `pausedUP`/`pausedDL` (paused) states **will not be checked by PBH**, so automatic range bans will not apply to these peers.
+
+When a torrent returns to `stalledUP` state, even if previously chain-banned IPs remain connected, no new chain bans will be triggered.
+:::
+
 ## Configuration File
 
 ```yaml

@@ -2,6 +2,12 @@
 
 Since PeerBanHelper implements Peer blocking by operating the downloader's IP blacklist, your IP blacklist will undoubtedly be overridden by PeerBanHelper. Therefore, PeerBanHelper has a built-in separate IP blacklist feature.
 
+:::warning Only checks active torrents
+PBH only checks torrents in an **active transfer state** (e.g., `downloading`, `uploading`, `stalledDL`, `forcedDL`, `forcedUP`, etc.). Peers on torrents in `stalledUP` (seeding but no active transfer), `pausedUP`/`pausedDL` (paused) states **will not be checked by PBH**, so IP blocking rules will not apply to these peers.
+
+This is an intentional design decision to reduce API request volume and downloader load. Even with this restriction, some users still experience downloader freezes during a full PBH ban wave cycle.
+:::
+
 :::tip
 It is not recommended to configure this feature through the configuration file; you can directly use the visual editor in the WebUI.
 :::

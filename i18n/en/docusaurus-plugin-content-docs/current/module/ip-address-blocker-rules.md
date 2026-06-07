@@ -3,6 +3,12 @@
 One of the important modules of PeerBanHelper, it subscribes to rules from [PBH-BTN/BTN-Collected-Rules](https://github.com/PBH-BTN/BTN-Collected-Rules) by default.  
 When an IP from the rules connects to the downloader, PeerBanHelper will immediately block it.
 
+:::warning Only checks active torrents
+PBH only checks torrents in an **active transfer state** (e.g., `downloading`, `uploading`, `stalledDL`, `forcedDL`, `forcedUP`, etc.). Peers on torrents in `stalledUP` (seeding but no active transfer), `pausedUP`/`pausedDL` (paused) states **will not be checked by PBH**, so subscription rules will not apply to these peers.
+
+This is an intentional design decision to reduce API request volume and downloader load. Even with this restriction, some users still experience downloader freezes during a full PBH ban wave cycle.
+:::
+
 :::tip
 It is not recommended to configure this feature through the configuration file; you can directly use the visual editor in the WebUI.
 :::
