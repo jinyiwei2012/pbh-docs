@@ -16,8 +16,6 @@ PBH 仅检查处于[活跃传输状态](https://github.com/qbittorrent/qBittorre
 
 :::
 
-![peer-id](./assets/peer-id.png)
-
 ## 配置文件
 
 规则使用[JSON规则引擎](../misc/json-engine.md)语法。

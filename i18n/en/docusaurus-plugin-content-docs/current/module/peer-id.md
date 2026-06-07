@@ -16,8 +16,6 @@ See [FAQ](../faq.md#why-are-some-connected-peers-not-being-banned-despite-config
 
 :::
 
-![peer-id](./assets/peer-id.png)
-
 ## Configuration File
 
 The rules use the [JSON rule engine](../misc/json-engine.md) syntax.
